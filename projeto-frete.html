@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Investigação de Frete via API | Anderson Capato</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Anderson Capato — FP&A & Dados</strong></a>
+									<ul class="icons">
+										<li><a href="https://br.linkedin.com/in/anderson-capato-barbosa-7782381a8" class="icon brands fa-linkedin"><span class="label">LinkdIn</span></a></li>
+										<li><a href="https://www.facebook.com/anderson.capato?mibextid=LQQJ4d" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="https://instagram.com/andersoncapato?igshid=MjEwN2IyYWYwYw==" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Conteúdo -->
+								<section>
+									<header class="main">
+										<h1>Investigação de divergência de frete entre VTEX, Softvar e transportadora via API</h1>
+									</header>
+
+									<span class="image main"><img src="img/Tecnologia.jpg" alt="" /></span>
+
+									<h2 id="content">O problema de negócio</h2>
+									<p>A transportadora Total Express cobrava da empresa um valor de frete maior do que o valor calculado e pago pelo cliente no checkout. A transportadora justificava isso dizendo que peso e dimensão chegavam zerados até ela — e ninguém na cadeia (VTEX, ERP, transportadora) sabia explicar por quê.</p>
+
+									<hr class="major" />
+
+									<h2 id="content">1. Hipótese descartada — configuração de doca na VTEX</h2>
+									<p>Verifiquei os campos de cubagem (soma das dimensões, maior aresta, fator de peso cúbico/mínimo) nas docas de Total Express e Correios. Estavam zerados nas duas. Corrigi, e o problema persistiu — hipótese descartada.</p>
+
+									<h2 id="content">2. Acesso à origem real do dado — API da VTEX</h2>
+									<p>Gerei credenciais de API, montei um script em Python no Google Colab e puxei o JSON de um pedido real via <code>GET /api/oms/pvt/orders/{orderId}</code>.</p>
+
+									<h2 id="content">3. Primeira descoberta — campo duplicado no JSON</h2>
+									<p><code>items[].dimension</code> (nível raiz) vinha <code>null</code>, enquanto <code>items[].additionalInfo.dimension</code> (aninhado) vinha completo e correto — peso, altura, largura, comprimento e peso cúbico —, refletindo fielmente o cadastro do SKU.</p>
+									<p>Conclusão parcial: o dado nunca esteve ausente. Está correto no catálogo e no pedido, só que "escondido" num campo diferente do que a integração provavelmente lê.</p>
+
+									<h2 id="content">4. Segunda descoberta — o bug real está na NFe, gerada pelo Softvar</h2>
+									<p>Investigando o XML da nota fiscal embutida no próprio pedido (<code>embeddedInvoice</code>), encontrei:</p>
+									<pre><code>&lt;vol&gt;&lt;pesoL&gt;0.300&lt;/pesoL&gt;&lt;pesoB&gt;0.030&lt;/pesoB&gt;&lt;/vol&gt;</code></pre>
+									<p>Peso bruto (0,030) menor que peso líquido (0,300) — fisicamente impossível. Pela tag <code>verProc</code> do XML, confirmei que quem gera essa nota é o Softvar, não a VTEX. O cadastro está certo, mas o motor de faturamento do Softvar converte esse peso errado na hora de emitir a NFe.</p>
+
+									<h2 id="content">5. Terceira descoberta — como o frete é calculado (arquitetura)</h2>
+									<p>Confirmei, na documentação oficial da VTEX, que o cálculo do frete no checkout (o valor cobrado do cliente) é feito inteiramente pela própria VTEX — ela usa o peso do catálogo, a tabela de frete contratada com a transportadora e a configuração de doca, sem consultar o Softvar nesse momento.</p>
+									<p>Isso separa o problema em dois cálculos independentes: o frete cobrado do cliente (VTEX, no checkout), provavelmente correto e sem evidência de erro; e o peso declarado na nota fiscal (Softvar, na emissão), comprovadamente errado — e é esse número que a transportadora provavelmente usa para conferir e cobrar a diferença na coleta.</p>
+
+									<hr class="major" />
+
+									<h2 id="content">Impacto e próximos passos</h2>
+									<p>A descoberta, sustentada por evidência técnica reproduzível (JSON e XML brutos de pedidos reais), expôs uma perda estimada em R$108 mil por ano, distribuída de forma imperceptível entre milhares de remessas, e direcionou a correção ao fornecedor certo — evitando meses de cobrança indevida.</p>
+									<p>Formalizei o problema junto ao suporte do Softvar, com a evidência técnica (campo <code>null</code>/<code>additionalInfo</code> e a inconsistência peso bruto/líquido na NFe), solicitando esclarecimento sobre a fórmula de conversão utilizada e qual campo é lido na integração.</p>
+
+									<h4>Ferramentas Utilizadas no Projeto</h4>
+										<ul>
+											<li>Python (Google Colab)</li>
+											<li>API REST (VTEX OMS)</li>
+											<li>Análise de JSON e XML (NFe)</li>
+											<li>Investigação cross-functional entre FP&A, TI e Logística</li>
+										</ul>
+
+									<ul class="actions">
+										<li><a href="index.html" class="button">Voltar ao Portfólio</a></li>
+									</ul>
+								</section>
+
+						</div>
+					</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
