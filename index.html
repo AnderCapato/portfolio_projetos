@@ -23,10 +23,10 @@
 							<!-- Header -->
 								<header id="header">
 									<a href="index.html" class="logo"><strong>Portfólio de Projetos em Ciência de Dados</strong></a>
-									<ul class="icons">										
+									<ul class="icons">
 										<li><a href="https://br.linkedin.com/in/anderson-capato-barbosa-7782381a8" class="icon brands fa-linkedin"><span class="label">LinkdIn</span></a></li>
-										<li><a href="https://www.facebook.com/anderson.capato?mibextid=LQQJ4d" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>										
-										<li><a href="https://instagram.com/andersoncapato?igshid=MjEwN2IyYWYwYw==" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>										
+										<li><a href="https://www.facebook.com/anderson.capato?mibextid=LQQJ4d" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="https://instagram.com/andersoncapato?igshid=MjEwN2IyYWYwYw==" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 									</ul>
 								</header>
 
@@ -137,7 +137,7 @@
 										<p>Atuando com suporte a clientes com problemas em seus computadores nos sistemas Windows, MAC e Linux.
 										<br>Suporte presencial e remoto para configurações de sistemas e periféricos em geral do PC.
 										<br>Gerenciamento de redes e backups de toda empresa.
-										</p>															
+										</p>
 								</section>
 
 							<!-- Projetos em Ciencia de Dados -->
@@ -148,34 +148,15 @@
 									<div class="posts">
 										<article>
 											<a href="#" class="image"><img src="img/Tecnologia.jpg" alt="" /></a>
-											<h3>Construção de um programa de fidelidade com clusterização de clientes</h3>
-											<p>Usei Python, Estatísticas e técnicas não supervisionadas de Machine Learning para segmentar um grupo de clientes com base em suas características de performance de compra, afim de selecionar grupos de clientes para formar um programa de fidelidade com o objetivo de aumentar a receita da empresa. E o resultado dessa solução, caso implementada, seria de U$15MM de receita anual.
+											<h3>Investigação de divergência de frete entre VTEX, Softvar e transportadora via API</h3>
+											<p>A transportadora Total Express cobrava valores de frete acima do calculado no checkout, alegando peso e dimensão zerados no recebimento — sem que VTEX, ERP ou a própria transportadora soubessem explicar o motivo. Descartada a hipótese de configuração de doca (campos de cubagem corrigidos, problema persistiu), acessei a origem real do dado consumindo a API da VTEX (GET /api/oms/pvt/orders/{orderId}) via Python, e identifiquei que a dimensão correta do pedido existia, mas em um campo do JSON diferente do provavelmente lido pela integração. Investigando o XML da NFe embutida no próprio pedido, encontrei peso bruto menor que peso líquido — uma inconsistência fisicamente impossível — e confirmei, pela tag verProc, que essa nota é gerada pelo motor de faturamento do Softvar, não pela VTEX. A investigação isolou o problema em dois cálculos independentes: o frete cobrado do cliente no checkout, calculado corretamente pela VTEX, e o peso declarado na nota fiscal pelo Softvar, comprovadamente incorreto — sendo esse o número usado pela transportadora para cobrar a diferença na coleta. A descoberta, sustentada por evidência técnica reproduzível (JSON e XML brutos de pedidos reais), apontou o ponto exato de correção ao fornecedor certo e expôs uma perda estimada em R$108 mil por ano, distribuída de forma imperceptível entre milhares de remessas.
 											</p>
 											<h4>Ferramentas Utilizadas no Projeto</h4>
 												<ul>
-													<li>Git, Gitlab e Github</li>
-													<li>Python, Pandas, Matplotlib e Seaborn</li>
-													<li>Jupyter Notebook</li>
-													<li>K-Means, Hierarquical Clustering, DBScan</li>
-													<li>AWS Cloud (EC2, S3, Postgres, SQLite)</li>
-													<li>Metabase Visualization</li>
-												</ul>
-											<ul class="actions">
-												<li><a href="#" class="button">Saiba Mais</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="img/Grafics.jpg" alt="" /></a>
-											<h3>Identificação de imóveis para compra e revenda afim de maximizar o lucro
-											</h3>
-											<p>Identificação de imóveis abaixo do preço médio de venda e definição do preço ideal de revenda, a partir de uma análise exploratória de dados em Python.</p>
-											<h4>Ferramentas Utilizadas no Projeto</h4>
-												<ul>
-													<li>Python, Pandas, Numpy e Seaborn</li>
-													<li>Anaconda, Pycharm e Jupyter Notebook</li>
-													<li>Mapas intrativos com Plotly e Folium</li>
-													<li>Heroku Cloud</li>
-													<li>Streamlit Python framework web</li>
+													<li>Python (Google Colab)</li>
+													<li>API REST (VTEX OMS)</li>
+													<li>Análise de JSON e XML (NFe)</li>
+													<li>Investigação cross-functional entre FP&A, TI e Logística</li>
 												</ul>
 											<ul class="actions">
 												<li><a href="#" class="button">Saiba Mais</a></li>
@@ -184,7 +165,7 @@
 									</div>
 								</section>
 
-				<!-- Contato -->				
+				<!-- Contato -->
 				<!-- Section -->
 				<section>
 					<header class="major">
@@ -194,7 +175,7 @@
 					<ul class="contact">
 						<li class="icon solid fa-envelope"><a href="#">andercapato@gmail.com</a></li>
 						<li class="icon brands fa-linkedin"><a href="https://br.linkedin.com/in/anderson-capato-barbosa-7782381a8">LinkdIn</a></li>
-						
+
 					</ul>
 				</section>
 
