@@ -10,6 +10,20 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			#banner .image.object img {
+				max-width: 280px;
+				width: 100%;
+				height: auto;
+				border-radius: 8px;
+				object-fit: cover;
+			}
+			@media screen and (max-width: 736px) {
+				#banner .image.object img {
+					max-width: 200px;
+				}
+			}
+		</style>
 	</head>
 	<body class="is-preload">
 
@@ -156,6 +170,66 @@
 												</ul>
 											<ul class="actions">
 												<li><a href="projeto-frete.html" class="button">Saiba Mais</a></li>
+											</ul>
+										</article>
+										<article>
+											<a href="estoque-parado.html" class="image"><img src="img/Idea 2.jpg" alt="" /></a>
+											<h3>R$ 1,3 milhão parados no estoque: cruzamento de três fontes de dados</h3>
+											<p>Cruzando base de estoque do ERP, histórico de vendas da VTEX e relatórios de expedição, identifiquei que cerca de 5.750 SKUs — quase metade do catálogo ativo — não tinham nenhuma saída registrada em 16 meses, representando ~R$1,34 milhão em capital imobilizado. O achado passou a ser indicador recorrente na apresentação mensal de saúde financeira à diretoria.
+											</p>
+											<h4>Ferramentas Utilizadas no Projeto</h4>
+												<ul>
+													<li>Excel / Power Query</li>
+													<li>ERP e VTEX (cruzamento multi-fonte)</li>
+													<li>Validação cruzada de dados</li>
+												</ul>
+											<ul class="actions">
+												<li><a href="estoque-parado.html" class="button">Saiba Mais</a></li>
+											</ul>
+										</article>
+										<article>
+											<a href="diagnostico-q1.html" class="image"><img src="img/Grafics.jpg" alt="" /></a>
+											<h3>Diagnóstico financeiro trimestral: separando causa operacional de queda de mercado</h3>
+											<p>Diante de uma queda de receita no trimestre, segmentei o faturamento por mês, marca e canal e cruzei com indicadores logísticos, isolando uma mudança de centro de distribuição como causa raiz — não sazonalidade ou mercado. O diagnóstico virou uma apresentação executiva de 10 slides e evitou decisões estratégicas equivocadas.
+											</p>
+											<h4>Ferramentas Utilizadas no Projeto</h4>
+												<ul>
+													<li>Excel / Power Query</li>
+													<li>Análise de séries temporais</li>
+													<li>PowerPoint (storytelling executivo)</li>
+												</ul>
+											<ul class="actions">
+												<li><a href="diagnostico-q1.html" class="button">Saiba Mais</a></li>
+											</ul>
+										</article>
+										<article>
+											<a href="simulador-budget.html" class="image"><img src="img/Programming 5.jpg" alt="" /></a>
+											<h3>Simulador de Budget P&L: do orçamento estático ao modelo de cenários</h3>
+											<p>Construí um simulador de DRE mês a mês com premissas editáveis (receita, custos, frete, despesas) e uma linha explícita de EBITDA, complementado por um Rolling Forecast de fluxo de caixa — transformando o orçamento anual em uma ferramenta viva de decisão em vez de um documento arquivado.
+											</p>
+											<h4>Ferramentas Utilizadas no Projeto</h4>
+												<ul>
+													<li>Excel avançado (modelagem multi-aba)</li>
+													<li>DRE Gerencial com EBITDA explícito</li>
+													<li>Rolling Forecast de caixa</li>
+												</ul>
+											<ul class="actions">
+												<li><a href="simulador-budget.html" class="button">Saiba Mais</a></li>
+											</ul>
+										</article>
+										<article>
+											<a href="etl-softvar.html" class="image"><img src="img/Hardware.jpg" alt="" /></a>
+											<h3>Pipeline ETL automatizado: do ERP à análise, sem extração manual</h3>
+											<p>Substituí a exportação manual diária de relatórios do ERP por um pipeline de ETL com GitHub Actions e Supabase, com diagnóstico prévio da API em Python/Colab para garantir estabilidade — eliminando uma tarefa manual repetitiva e criando uma base de dados histórica e consultável.
+											</p>
+											<h4>Ferramentas Utilizadas no Projeto</h4>
+												<ul>
+													<li>GitHub Actions</li>
+													<li>Python</li>
+													<li>Supabase / PostgreSQL</li>
+												</ul>
+											<ul class="actions">
+												<li><a href="etl-softvar.html" class="button">Saiba Mais</a></li>
 											</ul>
 										</article>
 									</div>
